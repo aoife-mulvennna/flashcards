@@ -1,0 +1,18 @@
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.cache/
+
+# Java / Spring
+backend/target/
+backend/.mvn/
+backend/.idea/
+backend/*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
