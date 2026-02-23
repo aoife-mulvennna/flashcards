@@ -1,0 +1,10 @@
+<h2>Flashcard Decks</h2>
+
+<input [(ngModel)]="newDeckName" placeholder="New deck name" />
+<button (click)="createDeck()">Create</button>
+
+<ul>
+  <li *ngFor="let deck of decks">
+    <button (click)="openDeck(deck)">{{ deck.name }}</button>
+  </li>
+</ul>
