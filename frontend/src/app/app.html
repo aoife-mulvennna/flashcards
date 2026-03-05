@@ -1,1 +1,27 @@
-<router-outlet />
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">📚</div>
+        <span class="sidebar-app-name">Flashcards</span>
+      </div>
+      <div class="sidebar-tagline">Study smarter</div>
+    </div>
+
+    <div class="sidebar-section-title">Your Decks</div>
+
+    <div class="sidebar-list">
+      <router-outlet name="sidebar"></router-outlet>
+    </div>
+
+    <div class="sidebar-footer">
+      <span>Built for studying</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="main-content">
+      <router-outlet/>
+    </main>
+  </div>
+</div>

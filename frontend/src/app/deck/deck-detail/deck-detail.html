@@ -1,26 +1,90 @@
-<h2>Deck</h2>
+<section class="card">
+  <div class="card-header">
+    <div class="card-title">Cards</div>
+    <div>
+      <button class="btn" (click)="toggleStudy()">{{ studyMode ? 'Back' : 'Study' }}</button>
+      <span class="badge">{{ cards.length }} cards</span>
+    </div>
+  </div>
 
-<div *ngIf="error" style="color: red;">
-  {{ error }}
-</div>
+  <div *ngIf="loading" class="muted">Loading...</div>
 
-<div *ngIf="loading">Loading...</div>
+  <div *ngIf="!loading">
+    <!-- Study mode -->
+    <div *ngIf="studyMode" class="study-view">
+      <div class="flip-card" (click)="toggleStudyFlip()" style="cursor:pointer;">
+        <div class="flip-inner" [class.is-flipped]="studyFlipped">
+          <div class="flip-face flip-front">
+            <div class="kicker">Question</div>
+            <div class="flip-text">{{ currentStudyCard()?.front }}</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="kicker">Answer</div>
+            <div class="flip-text">{{ currentStudyCard()?.back }}</div>
+          </div>
+        </div>
+      </div>
 
-<h3>Add a card</h3>
+      <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+        <button class="btn" (click)="prevStudy()">Prev</button>
+        <button class="btn" (click)="nextStudy()">Next</button>
+        <div class="muted">{{ studyIndex + 1 }} / {{ cards.length }}</div>
+      </div>
+    </div>
 
-<div style="display: flex; gap: 8px; flex-direction: column; max-width: 480px;">
-  <input [(ngModel)]="front" placeholder="Front (question)" />
-  <textarea [(ngModel)]="back" placeholder="Back (answer)"></textarea>
-  <button (click)="addCard()">Add Card</button>
-</div>
+    <!-- Manage cards grid -->
+    <div *ngIf="!studyMode" class="flip-grid">
+      <div
+        class="flip-card"
+        *ngFor="let c of cards"
+        [class.is-flipped]="isFlipped(c.id)"
+        (click)="toggleFlip(c.id)"
+        style="cursor: pointer;"
+        title="Click to flip"
+      >
+        <div class="flip-inner">
+          <!-- Front -->
+          <div class="flip-face flip-front">
+            <div class="flip-meta">
+              <div class="kicker">Question</div>
+              <div class="flip-hint">Click to reveal</div>
+            </div>
+            <div class="flip-text"><strong>{{ c.front }}</strong></div>
+            <div style="margin-top:8px; display:flex; gap:8px;">
+              <button class="btn" (click)="startEdit(c); $event.stopPropagation()">Edit</button>
+              <button class="btn" (click)="deleteCard(c.id); $event.stopPropagation()">Delete</button>
+            </div>
+            <div *ngIf="editingId === c.id" style="margin-top:8px;">
+              <input [(ngModel)]="editFront" />
+              <input [(ngModel)]="editBack" />
+              <button class="btn" (click)="saveEdit(c.id)">Save</button>
+              <button class="btn" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </div>
 
-<hr />
+          <!-- Back -->
+          <div class="flip-face flip-back">
+            <div class="flip-meta">
+              <div class="kicker">Answer</div>
+              <div class="flip-hint">Click to go back</div>
+            </div>
+            <div class="flip-text">{{ c.back }}</div>
+          </div>
+        </div>
+      </div>
 
-<h3>Cards</h3>
+      <div class="muted" *ngIf="cards.length === 0">
+        No cards yet — add your first card using the form below.
+      </div>
+    </div>
+  </div>
+</section>
 
-<ul>
-  <li *ngFor="let c of cards">
-    <strong>{{ c.front }}</strong>
-    <div>{{ c.back }}</div>
-  </li>
-</ul>
+<!-- Add card form -->
+<section style="margin-top:12px;" class="card">
+  <div style="display:flex; gap:8px; align-items:center;">
+    <input [(ngModel)]="front" placeholder="Question" />
+    <input [(ngModel)]="back" placeholder="Answer" />
+    <button class="btn" (click)="addCard()">Add Card</button>
+  </div>
+</section>

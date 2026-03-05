@@ -41,4 +41,12 @@ export class ApiService {
       { front, back }
     );
   }
+
+  updateCard(cardId: string, front: string, back: string): Observable<Card> {
+    return this.http.put<Card>(`${this.baseUrl}/cards/${cardId}`, { front, back });
+  }
+
+  deleteCard(cardId: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/cards/${cardId}`);
+  }
 }

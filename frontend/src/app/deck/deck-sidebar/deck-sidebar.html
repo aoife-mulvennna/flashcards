@@ -1,0 +1,15 @@
+<div class="sidebar-card card">
+  <div *ngIf="loading" class="muted">Loading decks…</div>
+  <div *ngIf="error" class="muted">{{ error }}</div>
+
+  <ul *ngIf="!loading">
+    <li *ngFor="let d of decks" (click)="open(d)" class="deck-item">
+      <div class="deck-name">{{ d.name }}</div>
+      <div class="deck-actions muted">Open</div>
+    </li>
+  </ul>
+
+  <div class="sidebar-add" style="margin-top:12px;">
+    <slot></slot>
+  </div>
+</div>

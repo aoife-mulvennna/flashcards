@@ -1,0 +1,20 @@
+<section class="study card">
+  <div *ngIf="loading" class="muted">Loading cards…</div>
+  <div *ngIf="error" class="muted">{{ error }}</div>
+
+  <div *ngIf="!loading && cards.length === 0" class="muted">No cards in this deck yet.</div>
+
+  <div *ngIf="!loading && cards.length > 0" class="study-area">
+    <div class="pager muted">{{ index + 1 }} / {{ cards.length }}</div>
+
+    <div class="study-card" (click)="toggle()">
+      <div class="face front" [class.hidden]="flipped">{{ current()?.front }}</div>
+      <div class="face back" [class.hidden]="!flipped">{{ current()?.back }}</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn secondary" (click)="prev()">Prev</button>
+      <button class="btn" (click)="next()">Next</button>
+    </div>
+  </div>
+</section>
