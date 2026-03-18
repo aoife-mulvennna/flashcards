@@ -1,4 +1,9 @@
-<div class="app-shell">
+@if (isAuthPage()) {
+  <main class="auth-layout">
+    <router-outlet />
+  </main>
+} @else {
+  <div class="app-shell">
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-brand">
@@ -16,7 +21,16 @@
 
     <div class="sidebar-footer">
       <span>Built for studying</span>
+      @if (authService.isLoggedIn()) {
+        <div class="auth-meta">
+          <span>{{ authService.email() }}</span>
+          <button type="button" (click)="logout()">Logout</button>
+        </div>
+      } @else {
+        <span>Please log in</span>
+      }
     </div>
+
   </aside>
 
   <div class="main">
@@ -25,3 +39,4 @@
     </main>
   </div>
 </div>
+}

@@ -1,4 +1,4 @@
-package com.aoife.flashcardsbackend.card;
+package com.aoife.flashcardsbackend.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import java.util.UUID;

@@ -1,7 +1,10 @@
-package com.aoife.flashcardsbackend.card;
+package com.aoife.flashcardsbackend.controller;
 
-import com.aoife.flashcardsbackend.deck.Deck;
-import com.aoife.flashcardsbackend.deck.DeckRepository;
+import com.aoife.flashcardsbackend.dto.CardDtos;
+import com.aoife.flashcardsbackend.repository.CardRepository;
+import com.aoife.flashcardsbackend.entity.CardEntity;
+import com.aoife.flashcardsbackend.entity.DeckEntity;
+import com.aoife.flashcardsbackend.repository.DeckRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,22 +34,22 @@ public class CardController {
     @PostMapping("/decks/{deckId}/cards")
     @ResponseStatus(HttpStatus.CREATED)
     public CardDtos.CardResponse createCard(@PathVariable UUID deckId, @Valid @RequestBody CardDtos.CreateCardRequest req) {
-        Deck deck = deckRepository.findById(deckId)
+        DeckEntity deck = deckRepository.findById(deckId)
                 .orElseThrow(() -> new IllegalArgumentException("Deck not found"));
 
-        Card saved = cardRepository.save(new Card(deck, req.front(), req.back()));
+        CardEntity saved = cardRepository.save(new CardEntity(deck, req.front(), req.back()));
         return new CardDtos.CardResponse(saved.getId(), saved.getDeckId(), saved.getFront(), saved.getBack());
     }
 
     @PutMapping("/cards/{cardId}")
     public CardDtos.CardResponse updateCard(@PathVariable UUID cardId, @Valid @RequestBody CardDtos.UpdateCardRequest req) {
-        Card card = cardRepository.findById(cardId)
+        CardEntity card = cardRepository.findById(cardId)
                 .orElseThrow(() -> new IllegalArgumentException("Card not found"));
 
         card.setFront(req.front());
         card.setBack(req.back());
 
-        Card saved = cardRepository.save(card);
+        CardEntity saved = cardRepository.save(card);
         return new CardDtos.CardResponse(saved.getId(), saved.getDeckId(), saved.getFront(), saved.getBack());
     }
 

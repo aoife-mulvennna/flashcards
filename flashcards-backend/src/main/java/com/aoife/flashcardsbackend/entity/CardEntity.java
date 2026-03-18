@@ -1,12 +1,11 @@
-package com.aoife.flashcardsbackend.card;
+package com.aoife.flashcardsbackend.entity;
 
-import com.aoife.flashcardsbackend.deck.Deck;
 import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
 @Table(name = "cards")
-public class Card {
+public class CardEntity {
 
     @Id
     @GeneratedValue
@@ -14,7 +13,7 @@ public class Card {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "deck_id", nullable = false)
-    private Deck deck;
+    private DeckEntity deck;
 
     @Column(nullable = false, columnDefinition = "text")
     private String front;
@@ -22,9 +21,9 @@ public class Card {
     @Column(nullable = false, columnDefinition = "text")
     private String back;
 
-    protected Card() {}
+    protected CardEntity() {}
 
-    public Card(Deck deck, String front, String back) {
+    public CardEntity(DeckEntity deck, String front, String back) {
         this.deck = deck;
         this.front = front;
         this.back = back;
@@ -54,7 +53,7 @@ public class Card {
         this.back = back;
     }
 
-    public Deck getDeck() {
+    public DeckEntity getDeck() {
         return deck;
     }
 }

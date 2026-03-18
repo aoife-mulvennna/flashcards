@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,23 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('Flashcards');
+  protected readonly isAuthPage = signal(false);
+
+  constructor(
+    protected authService: AuthService,
+    private router: Router
+  ) {
+    this.isAuthPage.set(this.router.url === '/');
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.isAuthPage.set(this.router.url === '/');
+      });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
+  }
 }
