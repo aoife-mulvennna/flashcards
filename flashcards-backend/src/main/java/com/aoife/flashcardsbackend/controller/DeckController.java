@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/decks")
+@RequestMapping("/api")
 public class DeckController {
 
     private final DeckRepository deckRepository;
@@ -20,28 +20,28 @@ public class DeckController {
         this.deckRepository = deckRepository;
     }
 
-    @GetMapping
+    @GetMapping("/getDecks")
     public List<DeckDtos.DeckResponse> listDecks() {
         return deckRepository.findAll().stream()
                 .map(d -> new DeckDtos.DeckResponse(d.getId(), d.getName()))
                 .toList();
     }
 
-    @PostMapping
+    @PostMapping("/createDeck")
     @ResponseStatus(HttpStatus.CREATED)
     public DeckDtos.DeckResponse createDeck(@Valid @RequestBody DeckDtos.CreateDeckRequest req) {
         DeckEntity saved = deckRepository.save(new DeckEntity(req.name()));
         return new DeckDtos.DeckResponse(saved.getId(), saved.getName());
     }
 
-    @GetMapping("/{deckId}")
+    @GetMapping("/getDecks/{deckId}")
     public DeckDtos.DeckResponse getDeck(@PathVariable UUID deckId) {
         DeckEntity deck = deckRepository.findById(deckId)
                 .orElseThrow(() -> new IllegalArgumentException("Deck not found"));
         return new DeckDtos.DeckResponse(deck.getId(), deck.getName());
     }
 
-    @DeleteMapping("/{deckId}")
+    @DeleteMapping("/deleteDeck/{deckId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDeck(@PathVariable UUID deckId) {
         deckRepository.deleteById(deckId);

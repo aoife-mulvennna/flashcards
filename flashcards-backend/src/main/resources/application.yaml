@@ -17,5 +17,5 @@ spring:
       indent_output: true
 app:
   jwt:
-    secret: your-very-long-random-secret-key-should-be-at-least-32-characters
+    secret: KUqUTOkORbpAEnV6JF4cCGGHmnYyw9U7xazc7vPoGaA=
     expiration: 86400000

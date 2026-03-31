@@ -44,6 +44,8 @@ public class AuthService {
     }
 
     public UserDtos.AuthResponse login(UserDtos.LoginRequest request) {
+        System.out.println("Trying login for email: " + request.email());
+        System.out.println("User exists: " + userRepository.findByEmail(request.email()).isPresent());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.email(),
@@ -53,6 +55,11 @@ public class AuthService {
 
         UserEntity user = userRepository.findByEmail(request.email())
                 .orElseThrow();
+
+
+        System.out.println("Stored email: " + user.getEmail());
+        System.out.println("Stored password: " + user.getPassword());
+        System.out.println("Enabled: " + user.isEnabled());
 
         String token = jwtService.generateToken(user.getEmail(), user.getRole());
         return new UserDtos.AuthResponse(token, user.getEmail(), user.getRole());

@@ -29,7 +29,7 @@ export class LoginComponent {
       : this.authService.login(this.email, this.password);
 
     request.subscribe({
-      next: () => this.router.navigateByUrl('/'),
+      next: () => this.router.navigateByUrl('/home'),
       error: () => this.error.set('Login failed. Check your email/password and try again.'),
     });
   }

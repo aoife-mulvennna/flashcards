@@ -9,7 +9,7 @@
   place-items: center;
   padding: 32px;
   background:
-    radial-gradient(circle at top left, rgba(244, 162, 97, 0.28), transparent 28%),
+    radial-gradient(circle at top left, rgba(57, 168, 38, 0.28), transparent 28%),
     radial-gradient(circle at bottom right, rgba(42, 157, 143, 0.16), transparent 30%),
     linear-gradient(135deg, #f6f1e8 0%, #efe7da 100%);
 }
@@ -53,7 +53,7 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #d97706;
+  border-color: #2d7c2e;
   box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.12);
 }
 
@@ -64,7 +64,7 @@ button[type='submit'] {
   font-weight: 700;
   font-size: 1rem;
   color: white;
-  background: linear-gradient(135deg, #d97706, #c2410c);
+  background: linear-gradient(135deg, #14d906, #11d55c);
   cursor: pointer;
 }
 
@@ -72,7 +72,7 @@ button[type='submit'] {
   margin-top: 14px;
   border: 0;
   background: transparent;
-  color: #7c5a2d;
+  color: #2d7c2e;
   font-weight: 600;
   cursor: pointer;
 }
