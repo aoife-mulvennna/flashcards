@@ -1,17 +1,48 @@
 <div class="login-page">
   <div class="login-card">
-    <h1>{{ isRegisterMode() ? 'Join Flashcards' : 'Welcome back' }}</h1>
-    <p>
-      {{ isRegisterMode()
-        ? 'Create an account and start building study decks.'
-        : 'Log in to pick up where you left off.' }}
+    <div class="brand">
+      <div class="brand-badge">F</div>
+      <div>
+        <div class="brand-name">Flashcards</div>
+        <div class="brand-tagline">Study smarter, one card at a time</div>
+      </div>
+    </div>
+
+    <h1>{{ isRegisterMode() ? 'Create your account' : 'Sign in' }}</h1>
+
+    <p class="intro-text">
+      {{
+        isRegisterMode()
+          ? 'Sign up to create decks, review cards, and keep track of your study progress.'
+          : 'Sign in to continue studying and pick up where you left off.'
+      }}
     </p>
 
     <form (ngSubmit)="submit()">
-      <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required />
-      <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
+      <label class="field">
+        <span>Email</span>
+        <input
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          required
+        />
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          required
+        />
+      </label>
+
       <button type="submit">
-        {{ isRegisterMode() ? 'Create account' : 'Log in' }}
+        {{ isRegisterMode() ? 'Create account' : 'Sign in' }}
       </button>
     </form>
 
@@ -19,8 +50,15 @@
       <p class="error-text">{{ error() }}</p>
     }
 
-    <button type="button" class="link-button" (click)="toggleMode()">
-      {{ isRegisterMode() ? 'Already have an account? Log in' : 'Need an account? Register' }}
-    </button>
+    <p class="switch-text">
+      {{
+        isRegisterMode()
+          ? 'Already have an account?'
+          : "Don't have an account?"
+      }}
+      <button type="button" class="link-button" (click)="toggleMode()">
+        {{ isRegisterMode() ? 'Sign in' : 'Create one' }}
+      </button>
+    </p>
   </div>
 </div>

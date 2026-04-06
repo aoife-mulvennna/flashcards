@@ -24,11 +24,11 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getDecks(): Observable<Deck[]> {
-    return this.http.get<Deck[]>(`${this.baseUrl}/decks`);
+    return this.http.get<Deck[]>(`${this.baseUrl}/getDecks`);
   }
 
   createDeck(name: string): Observable<Deck> {
-    return this.http.post<Deck>(`${this.baseUrl}/decks`, { name });
+    return this.http.post<Deck>(`${this.baseUrl}/createDeck`, { name });
   }
 
   getCards(deckId: string): Observable<Card[]> {

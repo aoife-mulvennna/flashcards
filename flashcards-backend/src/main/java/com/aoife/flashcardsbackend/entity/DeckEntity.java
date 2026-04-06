@@ -6,7 +6,10 @@ import org.apache.catalina.User;
 import java.util.UUID;
 
 @Entity
-@Table(name = "decks")
+@Table(name = "decks",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "name"})
+        })
 public class DeckEntity {
 
     @Id
@@ -20,10 +23,13 @@ public class DeckEntity {
     @JoinColumn(name = "user_id")
     private UserEntity owner;
 
-    protected DeckEntity() {}
+    protected DeckEntity() {
+    }
 
-    public DeckEntity(String name) {
+    public DeckEntity(String name,
+                      UserEntity owner) {
         this.name = name;
+        this.owner = owner;
     }
 
     public UUID getId() {
@@ -39,7 +45,7 @@ public class DeckEntity {
     }
 
     public UserEntity getOwner() {
-     return owner;
+        return owner;
     }
 
     public void setOwner(UserEntity owner) {

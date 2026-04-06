@@ -30,7 +30,12 @@ export class LoginComponent {
 
     request.subscribe({
       next: () => this.router.navigateByUrl('/home'),
-      error: () => this.error.set('Login failed. Check your email/password and try again.'),
+      error: () =>
+        this.error.set(
+          this.isRegisterMode()
+            ? 'Could not create your account. Please try again.'
+            : 'Could not sign in. Check your email and password and try again.'
+        ),
     });
   }
 

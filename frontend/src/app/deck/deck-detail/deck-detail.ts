@@ -10,7 +10,7 @@ import { ApiService, Card, Deck } from '../../core/services/api';
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule],
   template: `
-    <a class="back-link" routerLink="/">
+    <a class="back-link" routerLink="/home">
       ← All decks
     </a>
 
@@ -20,7 +20,7 @@ import { ApiService, Card, Deck } from '../../core/services/api';
         <p>{{ cards().length }} card{{ cards().length !== 1 ? 's' : '' }}</p>
       </div>
       <div class="page-actions">
-        <a [routerLink]="['/deck', deckId(), 'study']" class="btn btn-amber">
+        <a [routerLink]="['/deck', deckId(), 'study']" class="btn btn-forest">
           ▶ Study now
         </a>
       </div>

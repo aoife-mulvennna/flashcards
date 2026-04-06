@@ -29,8 +29,7 @@ public class DeckService {
         String email = authentication.getName();
         UserEntity owner = userRepository.findByEmail(email).orElseThrow();
 
-        DeckEntity deck = new DeckEntity(name);
-        deck.setOwner(owner);
+        DeckEntity deck = new DeckEntity(name, owner);
 
         return deckRepository.save(deck);
     }

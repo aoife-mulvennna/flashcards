@@ -254,10 +254,10 @@ html, body {
   &:active { transform: translateY(0); }
 }
 
-.btn-amber {
-  background: var(--amber);
+.btn-forest {
+  background: #045a16;
   color: #fff;
-  &:hover { background: #b45309; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(217,119,6,0.35); }
+  &:hover { background: #045a16; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(217,119,6,0.35); }
   &:active { transform: translateY(0); }
 }
 
@@ -319,11 +319,6 @@ html, body {
   }
 }
 
-.deck-card-emoji {
-  font-size: 28px;
-  margin-bottom: 12px;
-  display: block;
-}
 
 .deck-card-name {
   font-family: 'Playfair Display', serif;

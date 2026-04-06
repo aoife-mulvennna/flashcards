@@ -16,7 +16,7 @@ import { ApiService, Card, Deck } from '../../core/services/api';
     <!-- Study complete state -->
     @if (isComplete()) {
       <div class="study-complete">
-        <div class="study-complete-emoji">🎉</div>
+        <div class="emojistudy-complete-">🎉</div>
         <h2>Round complete!</h2>
         <p>
           @if (unknown().length === 0) {
@@ -37,7 +37,7 @@ import { ApiService, Card, Deck } from '../../core/services/api';
         </div>
         <div class="flex gap-2" style="flex-wrap:wrap; justify-content:center;">
           @if (unknown().length > 0) {
-            <button class="btn btn-amber" (click)="retestUnknown()">
+            <button class="btn btn-forest" (click)="retestUnknown()">
               Retry missed cards
             </button>
           }
